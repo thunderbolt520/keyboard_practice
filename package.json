@@ -1,0 +1,41 @@
+{
+  "name": "keyboard_practice",
+  "version": "1.0.0",
+  "description": "practice typing skill",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js",
+    "build": "webpack -d --watch",
+    "start": "concurrently \"npm run server\" \"npm run build\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thunderbolt520/keyboard_practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thunderbolt520/keyboard_practice/issues"
+  },
+  "homepage": "https://github.com/thunderbolt520/keyboard_practice#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "user-input-keyboard": "^0.4.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6"
+  }
+}
