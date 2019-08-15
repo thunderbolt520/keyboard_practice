@@ -1,22 +1,58 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import Axios from "axios";
+import WelcomePg from "./src/welcomePg";
+import Container from "@material-ui/core/Container";
+import DisplayText from "./src/displayText";
+import Drawer from "@material-ui/core/Drawer";
+import image1 from "./images//BrHs3D3.jpg";
 
+// const styles = {
+//   paperContainer: {
+//     backgroundImage: `url(${image1})`
+//   }
+// };
+// import Background from "./images/BrHs3D3.jpg";
+
+// var sectionStyle = {
+//   // width: "100%",
+//   // height: "800px"
+//   // backgroundImage: `url(${image1})`
+// };
+
+let styles = {
+  // margin: "20px",
+  // width: "250px",
+  height: "250px",
+  backgroundColor: "rgba(253, 255, 245, 0.8)"
+};
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      value: "",
+      start: false
     };
+    this.handleClick = this.handleClick.bind(this);
   }
-
+  handleClick() {
+    this.setState({ start: true });
+  }
   render() {
+    let { start } = this.state;
     return (
       <div>
-        <h3>testing</h3>
+        {/* <img src={image1} /> */}
+        {/* <h3>testing</h3> */}
+        <ul style={styles}>
+          {start ? (
+            <DisplayText />
+          ) : (
+            <WelcomePg handleClick={this.handleClick} />
+          )}
+        </ul>
       </div>
     );
   }
 }
-
+// style={{ backgroundImage: `url(../app/images/BrHs3D3.jpg)` }}
 ReactDOM.render(<App />, document.getElementById("app"));

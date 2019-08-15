@@ -6,7 +6,7 @@ class Movies extends React.Component {
     this.state = { value: "" };
   }
   render() {
-    return <div />;
+    return <div>welcome</div>;
   }
 }
 

@@ -17,6 +17,14 @@ const config = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: ["file-loader"]
+      },
+      {
+        test: /\.mp3$/,
+        loader: "file-loader"
       }
     ]
   },

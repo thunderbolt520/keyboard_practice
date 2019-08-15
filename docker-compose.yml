@@ -1,0 +1,32 @@
+version: "3"
+services:
+  db:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_DATABASE: keyboard_practice
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: 123
+      DATABASE_HOST: db
+    volumes:
+      # - ../review_files2:/docker-entrypoint-initdb.d/csv
+      - ./db/createDatabase.sql:/docker-entrypoint-initdb.d/createDatabase.sql
+      # - ./db/insertForDocker.sql:/docker-entrypoint-initdb.d/csv/insertForDocker.sql
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: keyboard_practice
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: 123
+    volumes:
+      - ./:/app
+    ports:
+      - "80:4000"
+    depends_on:
+      - db
+    restart: on-failure
