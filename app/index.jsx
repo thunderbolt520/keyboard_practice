@@ -6,19 +6,6 @@ import DisplayText from "./src/displayText";
 import Drawer from "@material-ui/core/Drawer";
 import image1 from "./images//BrHs3D3.jpg";
 
-// const styles = {
-//   paperContainer: {
-//     backgroundImage: `url(${image1})`
-//   }
-// };
-// import Background from "./images/BrHs3D3.jpg";
-
-// var sectionStyle = {
-//   // width: "100%",
-//   // height: "800px"
-//   // backgroundImage: `url(${image1})`
-// };
-
 let styles = {
   // margin: "20px",
   // width: "250px",
