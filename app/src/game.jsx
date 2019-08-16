@@ -8,7 +8,8 @@ class DisplayText extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: "",
+      words:
+        "keyboard practice words, keyboard practice words, keyboard practice words, keyboard practice words, keyboard practice words, keyboard practice words, keyboard practice words.",
       game: 1,
       color: "#FDFFF5",
       index: 0,
@@ -26,7 +27,7 @@ class DisplayText extends React.Component {
   }
   componentDidMount() {
     document.addEventListener("keydown", this.handleOnPress);
-    this.fetchWords();
+    // this.fetchWords();
   }
   fetchWords() {
     Axios.get(`/games/:${this.state.game}`)

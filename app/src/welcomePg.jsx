@@ -20,7 +20,7 @@ const WelcomePg = () => {
       ) : (
         <div>
           <Start clickStart={clickStart} setPlayer={setPlayer} />
-          <PostScore />
+          {/* <PostScore /> */}
         </div>
       )}
     </ul>

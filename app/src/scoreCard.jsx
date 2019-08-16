@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 class ScoreCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { time: 3 };
+    this.state = { time: 30 };
     this.countDown = this.countDown.bind(this);
     this.interval;
   }

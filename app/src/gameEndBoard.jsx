@@ -4,7 +4,7 @@ import Axios from "axios";
 
 const ScoreBoard = props => {
   function handleClick() {
-    submitScore();
+    // submitScore();
     window.location.reload();
   }
   const submitScore = () => {
