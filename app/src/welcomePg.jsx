@@ -1,23 +1,30 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
+import React, { useState } from "react";
+import Game from "./game";
+import Start from "./start";
+import PostScore from "./postScore";
 
-class WelcomePg extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: "" };
-  }
+const WelcomePg = () => {
+  const [start, setStart] = useState(false);
+  const [color, setColor] = useState("");
+  const [player, setPlayer] = useState("");
 
-  render() {
-    return (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={this.props.handleClick}
-      >
-        START GAME
-      </Button>
-    );
-  }
-}
+  const clickStart = () => {
+    setStart(true);
+    setColor("rgba(253, 255, 245, 0.8)");
+  };
+
+  return (
+    <ul style={{ height: "350px", backgroundColor: color }}>
+      {start ? (
+        <Game player={player} />
+      ) : (
+        <div>
+          <Start clickStart={clickStart} setPlayer={setPlayer} />
+          <PostScore />
+        </div>
+      )}
+    </ul>
+  );
+};
 
 export default WelcomePg;

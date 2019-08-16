@@ -1,5 +1,4 @@
-import React from "react";
-import ScoreBoard from "./scoreBoard";
+import React, { useEffect, useState } from "react";
 
 class ScoreCard extends React.Component {
   constructor(props) {
@@ -14,24 +13,20 @@ class ScoreCard extends React.Component {
   countDown() {
     let { time } = this.state;
     if (time <= 0) {
-      console.log("1");
       clearInterval(this.interval);
-      document.removeEventListener("keydown", this.handleOnPress, false);
-      document.removeEventListener("keydown", this.handleOnPress, true);
-      routeToScoreBoard();
+      document.removeEventListener("keydown", this.props.handleOnPress);
+      this.props.displayEndGame();
     } else this.setState({ time: (time - 1).toFixed(0) });
+    // console.log("t");
   }
-  routeToScoreBoard() {
-    return <ScoreBoard />;
-  }
+
   render() {
     let { time } = this.state;
+
     let { accuracy } = this.props;
     return (
       <div>
         <span>Time: {time}</span>
-        <br />
-        <span>RPM:</span>
         <br />
         <span>Accuracy:{`${accuracy} %`}</span>
         <br />
@@ -40,5 +35,33 @@ class ScoreCard extends React.Component {
     );
   }
 }
+
+// const ScoreCard = props => {
+//   const [time, setTime] = useState(3);
+//   let interval;
+//   useEffect(() => {
+//     interval = setInterval(countDown, 1000);
+//     return () => clearInterval(interval);
+//   });
+
+//   function countDown() {
+//     if (time <= 0) {
+//       // clearInterval(interval);
+//       document.removeEventListener("keydown", props.handleOnPress);
+//       props.displayEndGame();
+//     } else setTime(time - 1);
+//     // console.log("t");
+//   }
+
+//   return (
+//     <div>
+//       <span>Time: {time}</span>
+//       <br />
+//       <span>Accuracy:{`${props.accuracy} %`}</span>
+//       <br />
+//       <br />
+//     </div>
+//   );
+// };
 
 export default ScoreCard;

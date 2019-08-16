@@ -15,7 +15,6 @@ app.use("/", express.static(path.join(__dirname, "./dist")));
 
 app.get("/games/:id", (req, res) => {
   let id = req.params.id.slice(1);
-  console.log("here ", id);
   let sql = `SELECT words FROM keywords 
   WHERE id = ${id}`;
   mysql.query(sql, function(err, result) {
@@ -23,6 +22,34 @@ app.get("/games/:id", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     } else res.send(result);
+  });
+});
+
+app.get("/scoreCard", (req, res) => {
+  let sql = `SELECT player, score FROM players`;
+  mysql.query(sql, function(err, result) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      // console.log(result)
+      res.send(result);
+    }
+  });
+});
+
+app.post("/postScore", (req, res) => {
+  let { player, score } = req.body;
+
+  let sql = `INSERT INTO players (player, score) value(?,?)`;
+  mysql.query(sql, [player, score], function(err, result) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      console.log("success post new score into database");
+      res.send(result);
+    }
   });
 });
 

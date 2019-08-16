@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import Container from "@material-ui/core/Container";
 import keyClickSound from "../keypressSound.mp3";
 import ScoreCard from "./scoreCard";
+import GameEndBoard from "./gameEndBoard";
 
 class DisplayText extends React.Component {
   constructor(props) {
@@ -14,15 +14,18 @@ class DisplayText extends React.Component {
       index: 0,
       score: [],
       accuracy: 0,
-      letter: `qwertyuiopasdfghjklzxcvbnm1234567890,.?!@#$%^&*:;'"=+-_ QWERTYUIOPASDFGHJKLZXCVBNM`
+      letter: `qwertyuiopasdfghjklzxcvbnm1234567890,.?!@#$%^&*:;'"=+-_ QWERTYUIOPASDFGHJKLZXCVBNM`,
+      gameEnd: false,
+      total: 0
     };
     this.audio = new Audio(keyClickSound);
     this.handleOnPress = this.handleOnPress.bind(this);
     this.playSound = this.playSound.bind(this);
     this.calculateAccuracy = this.calculateAccuracy.bind(this);
+    this.displayEndGame = this.displayEndGame.bind(this);
   }
   componentDidMount() {
-    document.addEventListener("keydown", this.handleOnPress, false);
+    document.addEventListener("keydown", this.handleOnPress);
     this.fetchWords();
   }
   fetchWords() {
@@ -32,11 +35,11 @@ class DisplayText extends React.Component {
       })
       .catch(err => console.log("fail to fetchWords ", err));
   }
+
   handleOnPress(e) {
     let { index, letter, words, score, accuracy } = this.state;
     let key = e.key;
     let newScore = score;
-    // this.calculateAccuracy();
 
     if (key === "Backspace") {
       this.playSound();
@@ -62,7 +65,7 @@ class DisplayText extends React.Component {
       }
     }
   }
-  // removeEventListener()
+
   calculateAccuracy(num) {
     let { score } = this.state;
     let right = 0;
@@ -73,18 +76,26 @@ class DisplayText extends React.Component {
       if (score[i] === 1) right += 1;
     }
     ave = ((right / (score.length + 1)) * 100).toFixed(0);
-    this.setState({ accuracy: ave });
+    this.setState({ accuracy: ave, total: right });
   }
   playSound() {
     // this.audio.pause();
     this.audio.play();
   }
+  displayEndGame() {
+    this.setState({ gameEnd: true });
+  }
   render() {
     let words = this.state.words.split("");
-    let { color, accuracy } = this.state;
+    let { color, accuracy, gameEnd, total } = this.state;
+    let { player } = this.props;
     return (
       <div>
-        <ScoreCard accuracy={accuracy} />
+        <ScoreCard
+          accuracy={accuracy}
+          handleOnPress={this.handleOnPress}
+          displayEndGame={this.displayEndGame}
+        />
         {words.map((char, i) => {
           return (
             <span
@@ -96,6 +107,13 @@ class DisplayText extends React.Component {
             </span>
           );
         })}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        {gameEnd ? <GameEndBoard player={player} total={total} /> : ""}
       </div>
     );
   }
